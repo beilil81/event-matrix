@@ -13,26 +13,26 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class RabbitMQEventListner {
-    private static final Logger LOGGER = LoggerFactory.getLogger(RabbitMQEventListner.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(RabbitMQEventListner.class);
 
-    @Autowired private EventDAO eventDAO;
-    @Autowired private TypeEventsDAO typeEventsDAO;
+  @Autowired private EventDAO eventDAO;
+  @Autowired private TypeEventsDAO typeEventsDAO;
 
-    @RabbitListener(queues = {"${event.queue.name}"})
-    public void receive(EventVO eventVO) {
-        try {
-            LOGGER.info("Receive  message... {} ", eventVO.toString());
-            TypeEvents typeEvents = typeEventsDAO.findByTypeId(eventVO.getTypeId());
-            Event eventToSave =
-                    Event.builder()
-                            .libelle(eventVO.getLibelle())
-                            .description(eventVO.getDescription())
-                            .typeEvents(typeEvents)
-                            .emailPerson(eventVO.getEmailPerson())
-                            .build();
-            eventDAO.save(eventToSave);
-        } catch (Exception ex) {
-            LOGGER.info("Error  message... {} ", ex.getMessage(), ex);
-        }
+  @RabbitListener(queues = {"${event.queue.name}"})
+  public void receive(EventVO eventVO) {
+    try {
+      LOGGER.info("Receive  message... {} ", eventVO.toString());
+      TypeEvents typeEvents = typeEventsDAO.findByTypeId(eventVO.getTypeId());
+      Event eventToSave =
+          Event.builder()
+              .libelle(eventVO.getLibelle())
+              .description(eventVO.getDescription())
+              .typeEvents(typeEvents)
+              .emailPerson(eventVO.getEmailPerson())
+              .build();
+      eventDAO.save(eventToSave);
+    } catch (Exception ex) {
+      LOGGER.info("Error  message... {} ", ex.getMessage(), ex);
     }
+  }
 }

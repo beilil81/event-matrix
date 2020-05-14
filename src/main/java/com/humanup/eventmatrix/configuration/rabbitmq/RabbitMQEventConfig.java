@@ -25,7 +25,7 @@ public class RabbitMQEventConfig {
 
   @Bean
   Queue queue() {
-    return new Queue(queueName,false);
+    return new Queue(queueName, false);
   }
 
   @Bean

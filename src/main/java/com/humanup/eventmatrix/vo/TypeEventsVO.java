@@ -1,9 +1,8 @@
 package com.humanup.eventmatrix.vo;
 
+import java.io.Serializable;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-
-import java.io.Serializable;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor

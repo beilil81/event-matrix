@@ -1,19 +1,17 @@
 package com.humanup.eventmatrix.bs.impl;
 
-import com.humanup.eventmatrix.aop.dto.EventException;
 import com.humanup.eventmatrix.aop.dto.TypeEventException;
 import com.humanup.eventmatrix.bs.TypeEventsBS;
 import com.humanup.eventmatrix.bs.impl.sender.RabbitMQTypeEventsSender;
 import com.humanup.eventmatrix.dao.TypeEventsDAO;
 import com.humanup.eventmatrix.dao.entities.TypeEvents;
 import com.humanup.eventmatrix.vo.TypeEventsVO;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional(readOnly = true)
@@ -21,11 +19,12 @@ public class TypeEventsBSImpl implements TypeEventsBS {
 
   @Autowired private TypeEventsDAO typeEventsDAO;
 
-  @Autowired
-  RabbitMQTypeEventsSender rabbitMQTypeEventSender;
+  @Autowired RabbitMQTypeEventsSender rabbitMQTypeEventSender;
 
   @Override
-  @Transactional(transactionManager = "transactionManagerWrite",rollbackFor = TypeEventException.class)
+  @Transactional(
+      transactionManager = "transactionManagerWrite",
+      rollbackFor = TypeEventException.class)
   public boolean createTypeEvents(TypeEventsVO typeEventsVO) throws TypeEventException {
     if (null == typeEventsVO) throw new TypeEventException();
     rabbitMQTypeEventSender.send(typeEventsVO);

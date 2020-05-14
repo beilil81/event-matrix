@@ -1,11 +1,10 @@
 package com.humanup.eventmatrix.dao.entities;
 
-import lombok.*;
-import lombok.experimental.FieldDefaults;
-
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.*;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor

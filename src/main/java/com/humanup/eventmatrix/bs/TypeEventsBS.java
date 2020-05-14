@@ -2,7 +2,6 @@ package com.humanup.eventmatrix.bs;
 
 import com.humanup.eventmatrix.aop.dto.TypeEventException;
 import com.humanup.eventmatrix.vo.TypeEventsVO;
-
 import java.util.List;
 
 public interface TypeEventsBS {

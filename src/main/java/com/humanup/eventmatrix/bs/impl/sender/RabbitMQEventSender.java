@@ -9,19 +9,19 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class RabbitMQEventSender {
-    private static final Logger LOGGER = LoggerFactory.getLogger(RabbitMQEventSender.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(RabbitMQEventSender.class);
 
-    private final RabbitTemplate rabbitTemplate;
+  private final RabbitTemplate rabbitTemplate;
 
-    public RabbitMQEventSender(RabbitTemplate rabbitTemplate) {
-        this.rabbitTemplate = rabbitTemplate;
-    }
+  public RabbitMQEventSender(RabbitTemplate rabbitTemplate) {
+    this.rabbitTemplate = rabbitTemplate;
+  }
 
-    @Value("${event.queue.name}")
-    String queueName;
+  @Value("${event.queue.name}")
+  String queueName;
 
-    public void send(EventVO event) {
-        LOGGER.info("Sending message... {} ", event.toString());
-        rabbitTemplate.convertAndSend(queueName, event);
-    }
+  public void send(EventVO event) {
+    LOGGER.info("Sending message... {} ", event.toString());
+    rabbitTemplate.convertAndSend(queueName, event);
+  }
 }
